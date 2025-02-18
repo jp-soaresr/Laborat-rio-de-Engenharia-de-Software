@@ -1,20 +1,17 @@
-// let numero = prompt("Digite um número inteiro positivo:");
+let info = prompt("Digite a variável que será analisada:");
 
 
-// while (isNaN(numero) || numero <= 0) {
-//   numero = prompt("Número inválido. Digite um número inteiro positivo:");
+if (!isNaN(info) && info.trim() !== "") {
+    alert("Sua variável é um número.");
+} 
 
-// }
+else if (info.toLowerCase() === "true" || info.toLowerCase() === "false") {
+    alert("Sua variável é um booleano.");
+} 
 
-// numero = parseInt(numero);
-
-
-// var fatorial = 1;
-// for(i= 1; i <= numero; i++){
-
-//     fatorial *= i;  
-
+else {
+    alert("Sua variável é uma string.");
+}
 
 
-// };
-// alert('O resultado do seu numero e: ' +fatorial); 
+window.location.href = "../../index.html";

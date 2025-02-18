@@ -10,3 +10,5 @@ if (numero % 2 === 0) {
 } else {
   alert(numero + " é um número ímpar.");
 }
+
+window.location.href = "../../index.html";

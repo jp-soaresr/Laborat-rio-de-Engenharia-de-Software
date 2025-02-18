@@ -18,3 +18,6 @@ for(i= 1; i <= numero; i++){
 
 };
 alert('O resultado do seu numero e: ' +fatorial); 
+
+
+window.location.href = "../../index.html";
