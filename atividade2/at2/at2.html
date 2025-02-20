@@ -1,11 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relógio Digital</title>
+  <style>
+    /* Estilos para centralizar o relógio */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #282c34;
+      color: white;
+      font-family: 'Arial', sans-serif;
+    }
+
+    #relogio {
+      font-size: 48px;
+      font-weight: bold;
+      background-color: #444;
+      padding: 20px;
+      border-radius: 10px;
+    }
+  </style>
 </head>
 <body>
-    <p>proxima aula</p>
+  <div id="relogio"></div>
+
+  <script>
+    function atualizarHora() {
+      const agora = new Date();
+      
+      let horas = agora.getHours().toString().padStart(2, '0');
+      let minutos = agora.getMinutes().toString().padStart(2, '0');
+      let segundos = agora.getSeconds().toString().padStart(2, '0');
+      
+      document.getElementById('relogio').textContent = `${horas}:${minutos}:${segundos}`;
+    }
+
+    setInterval(atualizarHora, 1000); // Atualiza a cada segundo
+    atualizarHora(); 
+  </script>
 </body>
 </html>
