@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade 3</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        .resultado {
+            font-size: 1.5rem;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="text-center">Vamos verificar se sua palavra é um palíndromo</h1>
+
+        <div class="form-group">
+            <label for="palavra">Informe sua palavra:</label>
+            <input id="palavra" type="text" class="form-control" placeholder="Digite uma palavra ou frase">
+        </div>
+
+        <button onclick="verificarPalindromo()" class="btn btn-primary btn-block">Verificar</button>
+
+        <div id="resultado" class="resultado text-center"></div>
+    </div>
+
+    <script>
+        function verificarPalindromo() {
+            var texto = document.getElementById("palavra").value;
+            
+            var textoLimpo = texto.replace(/\s+/g, '').toLowerCase();
+            
+            var textoRevertido = textoLimpo.split('').reverse().join('');
+       
+            var resultadoDiv = document.getElementById("resultado");
+            if (textoLimpo === textoRevertido) {
+                resultadoDiv.innerHTML = '<div class="alert alert-success">A palavra ou frase é um palíndromo!</div>';
+            } else {
+                resultadoDiv.innerHTML = '<div class="alert alert-danger">A palavra ou frase não é um palíndromo.</div>';
+            }
+        }
+    </script>
+
+    
+</body>
+</html>
