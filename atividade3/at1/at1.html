@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Compras</title>
+
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <h1 class="text-center text-primary mb-4">Vamos fazer uma lista de compras:</h1>
+
+       
+        <div class="row mb-3">
+            <div class="col-8">
+                <input id="palavra" type="text" class="form-control" placeholder="Informe o nome do produto">
+            </div>
+            <div class="col-4">
+                <button onclick="adicionarProduto()" class="btn btn-success w-100">Adicionar</button>
+            </div>
+        </div>
+
+       
+        <h2 class="text-center text-secondary mb-4">Produtos listados:</h2>
+        <ol id="lista" class="list-group">
+            <!-- A lista de produtos será exibida aqui -->
+        </ol>
+    </div>
+
+    <script>
+        var produtos = [];
+
+        function adicionarProduto() {
+            var produto = document.getElementById("palavra").value;
+            
+            if (produto) {
+                produtos.push(produto);
+                document.getElementById("palavra").value = ""; 
+                
+                exibirLista();
+            } else {
+                alert("Por favor, informe um produto.");
+            }
+        }
+
+        function exibirLista() {
+            produtos.sort();
+            var listaElement = document.getElementById("lista");
+            listaElement.innerHTML = "";
+
+            // Adiciona cada produto à lista como um item de lista
+            produtos.forEach(function(produto) {
+                var li = document.createElement("li");
+                li.textContent = produto; // faz com qua os elemntos criados no 'innerHTML' nao fiquem escondidos uns dos outros.
+                listaElement.appendChild(li);
+            });
+        }
+    </script>
+
+</body>
+</html>
+
