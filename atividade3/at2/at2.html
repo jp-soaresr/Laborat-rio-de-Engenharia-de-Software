@@ -5,39 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Veículo</title>
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KyZXEJX3bQeJ6T/zx0lx7cm3lfZVfPj8ab3x5z2F2yIZ/Z6f5cX0/O5e9mFP01jz" crossorigin="anonymous"> -->
-    <!-- <style>
-    /* Estilizando o corpo para centralizar o conteúdo */
-    body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-        background-color: #f7f7f7;
-    }
-
-    .container {
-        max-width: 500px;
-    }
-
-    .card {
-        padding: 20px;
-    }
-
-    h1 {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    #resultado {
-        padding-top: 20px;
-        border-top: 1px solid #ddd;
-        margin-top: 20px;
-    }
-</style> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -74,21 +42,15 @@
 
         <button id="calcularBtn" class="btn btn-primary">Calcular</button>
 
-        <div id="resultado" class="mt-4">
-
-        </div>
+        <div id="resultado" class="mt-4"></div>
     </div>
 
-
     <script>
-
-        let caror;
-
+        let carro;
 
         document.getElementById("calcularBtn").addEventListener("click", gravarCampos);
 
         function gravarCampos() {
-
             const marca = document.getElementById("marca").value;
             const modelo = document.getElementById("modelo").value;
             const ano = parseInt(document.getElementById("ano").value);
@@ -96,14 +58,13 @@
             const km = parseInt(document.getElementById("km").value);
             const valorFipe = parseFloat(document.getElementById("valorFipe").value);
 
-            if (!marca || !modelo || !ano || !cor || !km || !valorFipe) {
-                alert("Por favor, preencha todos os campos.");
+            if (!marca || !modelo || isNaN(ano) || !cor || isNaN(km) || isNaN(valorFipe)) {
+                alert("Por favor, preencha todos os campos corretamente.");
                 return;
             }
 
 
-
-            const carro = new Carro(marca, modelo, ano, cor, km, valorFipe);
+            carro = new Carro(marca, modelo, ano, cor, km, valorFipe);
 
             gerarResposta();
         }
@@ -123,40 +84,27 @@
                 return anoAtual - this.ano;
             }
 
-
             valorMercado() {
                 if (this.kilometragem <= 30000) {
-                    var fipe110 = this.valorFipe * 1.10;
-
-                    return fipe110 + valorFipe.toFixed(2);  // 110% do valor FIPE
-                }
-                else if (this.kilometragem <= 50000) {
-                    return this.valorFipe.toFixed(2);  // 100% do valor FIPE
+                    return (this.valorFipe * 1.10).toFixed(2); // 110% 
+                } else if (this.kilometragem <= 50000) {
+                    return this.valorFipe.toFixed(2); // 100% 
                 } else {
-                    var fipe90 = this.valorFipe * 0.90;
-
-                    return valorFipe - fipe90.toFixed(2);  // 90% do valor FIPE
+                    return (this.valorFipe * 0.90).toFixed(2); // 90% 
                 }
             }
-
         }
 
-
-
-
         function gerarResposta() {
+
+
             const resultadoDiv = document.getElementById("resultado");
             resultadoDiv.innerHTML = `
                 <h4>Resultado:</h4>
-                <p><strong>Ano de utilização:</strong> ${carro.anosUtilizacao()} anos</p>
+                <p><strong>Anos de utilização:</strong> ${carro.anosUtilizacao()} anos</p>
                 <p><strong>Valor de Mercado:</strong> R$ ${carro.valorMercado()}</p>
             `;
         }
-
-
-
-
-
     </script>
 </body>
 
