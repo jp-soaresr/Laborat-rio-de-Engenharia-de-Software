@@ -1,0 +1,67 @@
+body {
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    width: 350px;
+    background-color: #222;
+    color: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-control {
+    background-color: #333;
+    color: white;
+    text-align: right;
+    font-size: 2rem;
+    border: none;
+    height: 60px;
+    border-radius: 10px;
+}
+
+.btn {
+    font-size: 1.5rem;
+    height: 60px;
+    border-radius: 10px;
+    border: none;
+    margin: 5px;
+}
+
+.btn-warning {
+    background-color: #ff9f0a;
+    color: white;
+}
+
+.btn-danger {
+    background-color: #ff3b30;
+    color: white;
+}
+
+.btn-success {
+    background-color: #34c759;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #505050;
+    color: white;
+}
+
+.d-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
