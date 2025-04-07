@@ -1,218 +1,238 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-    <style>
-        /* Estilo base para todos os botões */
-        .botao {
-            font-size: 1.8rem;
-            height: 60px;
-            min-width: 60px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background-color: #505050;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        }
+  <style>
+    .calculadora {
+      width: 320px;
+    }
 
-        .botao:hover {
-            background-color: #383838;
-            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
-            transform: translateY(-2px);
-        }
+    .display {
+      width: 100%;
+      height: 60px;
+      font-size: 2rem;
+      text-align: right;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      background-color: #222;
+      color: white;
+    }
 
-        .botao:active {
-            background-color: #2a2a2a;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-            transform: translateY(0);
-        }
+    .botao {
+      font-size: 1.8rem;
+      height: 60px;
+      min-width: 60px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background-color: #505050;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
 
-        .botao:focus {
-            outline: none;
-            box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.5);
-        }
+    .botao:hover {
+      background-color: #383838;
+      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+      transform: translateY(-2px);
+    }
 
-        /* Estilos para botões específicos */
-        .botao-danger:hover {
-            background-color: #ff5c4d;
-        }
+    .botao:active {
+      background-color: #2a2a2a;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+      transform: translateY(0);
+    }
 
-        .botao-warning:hover {
-            background-color: #ffb833;
-        }
+    .botao:focus {
+      outline: none;
+      box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.5);
+    }
 
-        .botao-success:hover {
-            background-color: #4cd964;
-        }
+    .linha {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
 
-        .botao-secondary:hover {
-            background-color: #404040;
-        }
+    .botoes-container {
+      margin-top: 20px;
+    }
 
-        /* Responsividade */
-        @media (max-width: 600px) {
-            .calculadora {
-                width: 90%;
-            }
+    @media (max-width: 600px) {
+      .calculadora {
+        width: 90%;
+      }
 
-            .display {
-                font-size: 2rem;
-                height: 50px;
-            }
+      .display {
+        font-size: 2rem;
+        height: 50px;
+      }
 
-            .botao {
-                font-size: 1.5rem;
-                height: 50px;
-            }
-        }
+      .botao {
+        font-size: 1.5rem;
+        height: 50px;
+      }
+    }
 
-        @media (max-width: 400px) {
-            .calculadora {
-                width: 95%;
-            }
+    @media (max-width: 400px) {
+      .calculadora {
+        width: 95%;
+      }
 
-            .display {
-                font-size: 1.8rem;
-                height: 45px;
-            }
+      .display {
+        font-size: 1.8rem;
+        height: 45px;
+      }
 
-            .botao {
-                font-size: 1.4rem;
-                height: 45px;
-            }
-        }
-    </style>
+      .botao {
+        font-size: 1.4rem;
+        height: 45px;
+      }
+    }
+  </style>
 </head>
 
-
 <body>
-    <div id="primeira">
+  <div id="app"></div>
 
-    </div>
-</body>
-
-<script>
-    // Adiciona o Bootstrap ao head
-    const linkBootstrap = document.createElement("link");
-    linkBootstrap.rel = "stylesheet";
-    linkBootstrap.href = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css";
-    document.head.appendChild(linkBootstrap);
-
-    // Adiciona um arquivo CSS externo para melhor organização
-    const linkCSS = document.createElement("link");
-    linkCSS.rel = "stylesheet";
-    linkCSS.href = "styles.css";
-    document.head.appendChild(linkCSS);
-
-    // Criação da estrutura principal da calculadora
-    const container = document.createElement("div");
-    container.className = "container mt-5 d-flex justify-content-center";
-    document.getElementById("primeira").appendChild(container);
-
-    const calculadora = document.createElement("div");
-    calculadora.className = "calculadora";
-    container.appendChild(calculadora);
-
-    // Criando o display
-    const display = document.createElement("input");
-    display.className = "display";
-    display.setAttribute("readonly", "true");
-    calculadora.appendChild(display);
-
-    // Criando os botões individualmente
-    const botoesContainer = document.createElement("div");
-    botoesContainer.className = "botoes-container";
-    calculadora.appendChild(botoesContainer);
-
-    function criarBotao(texto, classe = "botao") {
-        const botao = document.createElement("button");
-        botao.textContent = texto;
-        botao.className = classe;
-        botao.addEventListener("click", () => processarEntrada(texto));
-        return botao;
-    }
-
-    function criarLinha(...botoes) {
-        const linha = document.createElement("div");
-        linha.className = "linha";
-        botoes.forEach(botao => linha.appendChild(botao));
-        botoesContainer.appendChild(linha);
-    }
-
-    // Criando e organizando os botões na calculadora
-    criarLinha(criarBotao('C', "botao botao-danger"), criarBotao('9'), criarBotao('8'), criarBotao('7'), criarBotao('/', "botao botao-warning"));
-    criarLinha(criarBotao('6'), criarBotao('5'), criarBotao('4'), criarBotao('*', "botao botao-warning"));
-    criarLinha(criarBotao('3'), criarBotao('2'), criarBotao('1'), criarBotao('-', "botao botao-warning"));
-    criarLinha(criarBotao('0'), criarBotao(','), criarBotao('%', "botao botao-warning"), criarBotao('=', "botao botao-success"), criarBotao('+', "botao botao-warning"));
-
-    // Classe para manipular os cálculos
+  <script>
     class Calculadora {
-        constructor() {
-            this.valorAtual = "";
-            this.valorAnterior = "";
-            this.operacao = null;
+      constructor(displayElement) {
+        this.displayElement = displayElement;
+        this.valorAtual = "";
+        this.valorAnterior = "";
+        this.operacao = null;
+        this.atualizarDisplay();
+      }
+
+      processarEntrada(valor) {
+        if (!isNaN(valor)) {
+          this.valorAtual += valor;
+        } else if (valor === ',') {
+          if (!this.valorAtual.includes(',')) {
+            this.valorAtual += valor;
+          }
+        } else if (valor === 'C') {
+          this.valorAtual = "";
+          this.valorAnterior = "";
+          this.operacao = null;
+        } else if (valor === '=') {
+          this.calcularResultado();
+        } else {
+          if (this.valorAtual === "") return;
+          if (this.valorAnterior !== "") {
+            this.calcularResultado();
+          }
+          this.operacao = valor;
+          this.valorAnterior = this.valorAtual;
+          this.valorAtual = "";
         }
 
-        processarEntrada(valor) {
-            if (!isNaN(valor) || valor === ',') {
-                this.valorAtual += valor;
-            } else if (valor === 'C') {
-                this.valorAtual = "";
-                this.valorAnterior = "";
-                this.operacao = null;
-            } else if (valor === '=') {
-                this.calcularResultado();
-            } else {
-                this.valorAnterior = this.valorAtual;
-                this.valorAtual = "";
-                this.operacao = valor;
-            }
-            display.value = this.valorAtual || this.valorAnterior;
+        this.atualizarDisplay();
+      }
+
+      calcularResultado() {
+        let resultado;
+        const numAnterior = parseFloat(this.valorAnterior.replace(',', '.'));
+        const numAtual = parseFloat(this.valorAtual.replace(',', '.'));
+
+        switch (this.operacao) {
+          case '+': resultado = numAnterior + numAtual; break;
+          case '-': resultado = numAnterior - numAtual; break;
+          case '*': resultado = numAnterior * numAtual; break;
+          case '/': resultado = numAtual !== 0 ? numAnterior / numAtual : "Erro"; break;
+          case '%': resultado = numAnterior * (numAtual / 100); break;
+          default: resultado = "Erro";
         }
 
-        calcularResultado() {
-            let resultado;
-            const numAnterior = parseFloat(this.valorAnterior.replace(',', '.'));
-            const numAtual = parseFloat(this.valorAtual.replace(',', '.'));
+        this.valorAtual = resultado.toString().replace('.', ',');
+        this.valorAnterior = "";
+        this.operacao = null;
+      }
 
-            switch (this.operacao) {
-                case '+': resultado = numAnterior + numAtual; break;
-                case '-': resultado = numAnterior - numAtual; break;
-                case '*': resultado = numAnterior * numAtual; break;
-                case '/': resultado = numAtual !== 0 ? numAnterior / numAtual : "Erro"; break;
-                case '%': resultado = numAnterior * (numAtual / 100); break;
-                default: resultado = "Erro";
-            }
-
-            this.valorAtual = resultado.toString().replace('.', ',');
-            this.valorAnterior = "";
-            this.operacao = null;
-        }
+      atualizarDisplay() {
+        this.displayElement.value = this.valorAtual || this.valorAnterior || "0";
+      }
     }
 
-    const calculadoraObj = new Calculadora();
-
-    function processarEntrada(valor) {
-        calculadoraObj.processarEntrada(valor);
+   
+    function criarBotao(texto, classeExtra = '') {
+      const botao = document.createElement('button');
+      botao.textContent = texto;
+      botao.className = `botao ${classeExtra}`;
+      return botao;
     }
 
+  
+    const container = document.getElementById('app');
 
+    const wrapper = document.createElement('div');
+    wrapper.className = 'container mt-5 d-flex justify-content-center';
 
-    // vamos criar as funçoes que iram fazer as contas, sendo que ao ser clicado em um numero devemos guardar a variavel dele para usar na funçoes, sendo que temos que fazer uma de adição, subtração, divisao, multiplicação, porcentagem, 
-    // sendo que o nosso estilo ainda esta muitoo feio, caso queira pode gerar um arquivo css para deixar os botoes de deteminados tamanhos e organizar eles melhor
+    const calculadoraDiv = document.createElement('div');
+    calculadoraDiv.className = 'calculadora';
 
+    const display = document.createElement('input');
+    display.type = 'text';
+    display.className = 'display';
+    display.readOnly = true;
 
+    calculadoraDiv.appendChild(display);
 
-</script>
+    const botoesContainer = document.createElement('div');
+    botoesContainer.className = 'botoes-container';
 
+    const botoes = [
+      ['C', '7', '8', '9', '/'],
+      ['4', '5', '6', '*'],
+      ['1', '2', '3', '-'],
+      ['0', ',', '=', '+']
+    ];
+
+    const classePorValor = {
+      'C': 'botao-danger',
+      '=': 'botao-success',
+      '/': 'botao-warning',
+      '*': 'botao-warning',
+      '-': 'botao-warning',
+      '+': 'botao-warning'
+    };
+
+    botoes.forEach(linhaValores => {
+      const linha = document.createElement('div');
+      linha.className = 'linha';
+
+      linhaValores.forEach(valor => {
+        const classeExtra = classePorValor[valor] || '';
+        const botao = criarBotao(valor, classeExtra);
+        linha.appendChild(botao);
+      });
+
+      botoesContainer.appendChild(linha);
+    });
+
+    calculadoraDiv.appendChild(botoesContainer);
+    wrapper.appendChild(calculadoraDiv);
+    container.appendChild(wrapper);
+
+    const calculadora = new Calculadora(display);
+
+    container.querySelectorAll('.botao').forEach(botao => {
+      botao.addEventListener('click', () => {
+        calculadora.processarEntrada(botao.textContent);
+      });
+    });
+  </script>
+</body>
 
 </html>

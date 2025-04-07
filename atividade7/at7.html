@@ -21,7 +21,7 @@
                     const intervalo = setInterval(() => {
                         setTextoAtual((prev) => prev + textoCompleto[index]);
                         setIndex(index + 1);
-                    }, 150); // Intervalo de 150ms entre cada letra
+                    }, 150); 
                     return () => clearInterval(intervalo); // Limpar intervalo ao desmontar
                 }
             }, [index]);
